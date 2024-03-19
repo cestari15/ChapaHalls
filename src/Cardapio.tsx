@@ -28,6 +28,27 @@ const dados: lanches[] = [
 
 ];
 
+interface acompanhamentos {
+    id: string;
+    nome: string;
+    preco: number;
+    Ingredientes: string;
+    image: any;
+}
+
+const dados2: acompanhamentos[] = [
+    { id: '1', nome: '𝕱𝖗𝖎𝖙𝖆𝖘', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
+    { id: '2', nome: '𝕮𝖊𝖇𝖔𝖑𝖆 𝕮𝖗𝖎𝖘𝖕', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
+    { id: '3', nome: '𝕮𝖆𝖑𝖆𝖇𝖗𝖊𝖘𝖆', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
+    { id: '4', nome: '', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
+    { id: '5', nome: '', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
+    { id: '6', nome: '', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
+    { id: '7', nome: '', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
+    { id: '8', nome: '', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
+    { id: '9', nome: '', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
+   
+];
+
 const renderItem = ({ item }: { item: lanches }) => (
     <TouchableOpacity style={styles.item}>
         <Text style={styles.itemTitle}>{item.nome}</Text>
@@ -115,9 +136,9 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     headerText: {
-        fontSize: 30,
+        fontSize: 40,
         color: 'black',
-        marginLeft: 120
+        marginLeft: 95
     },
     footer: {
         borderTopWidth: 0.2,
