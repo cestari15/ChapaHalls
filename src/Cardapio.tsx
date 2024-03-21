@@ -68,7 +68,31 @@ const renderItem = ({ item }: { item: lanches }) => (
     </TouchableOpacity>
 );
 
+interface promocoes {
+    id: string;
+    nome: string;
+    preco: number;
+    Ingredientes: string;
+    image: any;
+}
 
+const dados4: promocoes[] = [
+    { id: '1', nome: '𝕮𝖔𝖒𝖇𝖔 2 𝖃-𝖙𝖚𝖉𝖔 𝖊 𝕮𝖔𝖈𝖆-𝖈𝖔𝖑𝖆', preco: 60.00, Ingredientes: "Refrigerante de 2 Litros", image: require('./assets/images/coca.png') },
+    { id: '2', nome: '𝕮𝖔𝖒𝖇𝖔 3 𝖃-𝖙𝖚𝖉𝖔 𝖊 2 𝕽𝖊𝖋𝖗𝖎', preco: 70.00, Ingredientes: "Refrigerante de 2 Litros", image: require('./assets/images/sprite2.png') },
+    { id: '3', nome: '𝕮𝖔𝖒𝖇𝖔 2 𝖋𝖗𝖎𝖙𝖆𝖘 𝖊 1 𝖗𝖊𝖋𝖗𝖎', preco: 60.00, Ingredientes: "Refrigerante de 2 Litros", image: require('./assets/images/fanta2.png') },
+    { id: '4', nome: '𝕮𝖔𝖒𝖇𝖔 3 𝖕𝖔𝖗𝖈̧𝖔̃𝖊𝖘 𝖊 2 𝖃-𝕿𝖚𝖉𝖔', preco: 50.00, Ingredientes: "Refrigerante de 2 Litros", image: require('./assets/images/tubaina.png') },
+
+];
+const renderItem4 = ({ item }: { item: promocoes }) => (
+    <TouchableOpacity style={styles.item}>
+        <Text style={styles.itemTitle}>{item.nome}</Text>
+        <Text style={styles.decoracao}>--------------------------</Text>
+        <Text style={styles.itemText}>R${item.preco},00</Text>
+        <Text style={styles.decoracao}>--------------------------</Text>
+        <Text style={styles.itemText}>{item.Ingredientes}</Text>
+        <Image source={item.image} style={styles.image} />
+    </TouchableOpacity>
+);
 
 const renderItem2 = ({ item }: { item: acompanhamentos }) => (
     <TouchableOpacity style={styles.item}>
@@ -99,13 +123,14 @@ function Cardapio(): React.JSX.Element {
             <StatusBar backgroundColor="black" barStyle='light-content' />
 
             <View style={styles.header}>
-               <Image  style={styles.imageHeader} source={require('./assets/images/logo.png')}/>
+                <Image style={styles.imageHeader} source={require('./assets/images/logo.png')} />
             </View>
             <ScrollView>
                 <Text style={styles.textoA}>𝕷𝖆𝖓𝖈𝖍𝖊𝖘</Text>
                 <FlatList
 
-                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                    horizontal={true}
                     data={dados}
                     renderItem={renderItem}
                     keyExtractor={(item) => item.id}
@@ -113,7 +138,7 @@ function Cardapio(): React.JSX.Element {
 
 
                 />
-                   <Text style={styles.textoB}>𝕬𝖈𝖔𝖒𝖕𝖆𝖓𝖍𝖆𝖒𝖆𝖓𝖊𝖙𝖔𝖘</Text>
+                <Text style={styles.textoB}>𝕬𝖈𝖔𝖒𝖕𝖆𝖓𝖍𝖆𝖒𝖆𝖓𝖊𝖙𝖔𝖘</Text>
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={dados2}
@@ -130,7 +155,18 @@ function Cardapio(): React.JSX.Element {
                     keyExtractor={(item) => item.id}
                     style={styles.lista2}
                 />
+
+                <Text style={styles.textoC}>𝕻𝖗𝖔𝖒𝖔𝖈̧𝖔̃𝖊𝖘</Text>
+                <FlatList
+                    showsHorizontalScrollIndicator={false}
+                    horizontal={true}
+                    data={dados4}
+                    renderItem={renderItem4}
+                    keyExtractor={(item) => item.id}
+                />
+
             </ScrollView>
+
 
 
             <View style={styles.footer}>
@@ -155,26 +191,29 @@ function Cardapio(): React.JSX.Element {
     );
 }
 const styles = StyleSheet.create({
-    imageHeader:{
-        height:100,
-        marginTop:40,
-        marginLeft:'auto',
-        marginRight:'auto',
-       width:300
+    promocao: {
+
     },
-    textoB:{
-        marginLeft:'auto',
-        marginRight:'auto',
-          fontSize: 40,
-          color: 'black',
-          marginTop:70
-      },
-    textoA:{
-      marginLeft:'auto',
-      marginRight:'auto',
+    imageHeader: {
+        height: 100,
+        marginTop: 40,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: 300
+    },
+    textoB: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
         fontSize: 40,
         color: 'black',
-        marginTop:80
+        marginTop: 70
+    },
+    textoA: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        fontSize: 40,
+        color: 'black',
+        marginTop: 80
     },
     lista2: {
         marginTop: 30
@@ -231,6 +270,13 @@ const styles = StyleSheet.create({
         width: 200,
         borderRadius: 30
     },
+    textoC: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        fontSize: 40,
+        color: 'black',
+
+    }
 
 });
 
