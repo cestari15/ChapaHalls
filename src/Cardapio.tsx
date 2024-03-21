@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList, Touchable, TouchableOpacity, StatusBar, Image } from "react-native";
+import { View, Text, StyleSheet, FlatList, Touchable, TouchableOpacity, StatusBar, Image, ScrollView } from "react-native";
 
 interface lanches {
     id: string;
@@ -37,19 +37,52 @@ interface acompanhamentos {
 }
 
 const dados2: acompanhamentos[] = [
-    { id: '1', nome: '𝕱𝖗𝖎𝖙𝖆𝖘', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
-    { id: '2', nome: '𝕮𝖊𝖇𝖔𝖑𝖆 𝕮𝖗𝖎𝖘𝖕', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
-    { id: '3', nome: '𝕮𝖆𝖑𝖆𝖇𝖗𝖊𝖘𝖆', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
-    { id: '4', nome: '', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
-    { id: '5', nome: '', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
-    { id: '6', nome: '', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
-    { id: '7', nome: '', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
-    { id: '8', nome: '', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
-    { id: '9', nome: '', preco: 30.00, Ingredientes: "pão, queijo, 3 hamburguers, 5 ovo, 4 salsicha , salada", image: require('./assets/images/big.jpg') },
-   
+    { id: '1', nome: '𝕱𝖗𝖎𝖙𝖆𝖘', preco: 45.00, Ingredientes: "Porção de batata frita de 500g", image: require('./assets/images/batata.jpeg') },
+    { id: '2', nome: '𝕮𝖊𝖇𝖔𝖑𝖆 𝕮𝖗𝖎𝖘𝖕', preco: 50.00, Ingredientes: "Porção de cebola empanada de 500g", image: require('./assets/images/cebola.jpeg') },
+    { id: '3', nome: '𝕮𝖆𝖑𝖆𝖇𝖗𝖊𝖘𝖆', preco: 30.00, Ingredientes: "Porção de calabresa frita de 500g", image: require('./assets/images/calabresa.jpeg') },
+    { id: '4', nome: '𝕮𝖆𝖑𝖆𝖇𝖗𝖊𝖘𝖆 𝖈/ 𝕭𝖆𝖙𝖆𝖙𝖆', preco: 75.00, Ingredientes: "500g de fritas e Calabresa", image: require('./assets/images/fritas_cala.jpeg') },
 ];
 
+interface bebidas {
+    id: string;
+    nome: string;
+    preco: number;
+    Ingredientes: string;
+    image: any;
+}
+const dados3: acompanhamentos[] = [
+    { id: '1', nome: '𝕮𝖔𝖈𝖆-𝕮𝖔𝖑𝖆', preco: 10.00, Ingredientes: "Refrigerante de 2 Litros", image: require('./assets/images/coca.png') },
+    { id: '2', nome: '𝕾𝖕𝖗𝖎𝖙𝖊', preco: 10.00, Ingredientes: "Refrigerante de 2 Litros", image: require('./assets/images/sprite2.png') },
+    { id: '3', nome: '𝕱𝖆𝖓𝖙𝖆', preco: 10.00, Ingredientes: "Refrigerante de 2 Litros", image: require('./assets/images/fanta2.png') },
+    { id: '4', nome: '𝕿𝖚𝖇𝖆𝖎𝖓𝖆', preco: 10.00, Ingredientes: "Refrigerante de 2 Litros", image: require('./assets/images/tubaina.png') },
+    { id: '5', nome: '𝕮𝖔𝖕𝖔 𝕲𝖊𝖑𝖔 & 𝕷𝖎𝖒𝖆̃𝖔', preco: 2.00, Ingredientes: "Copo com gelo e limão rosa em fatias", image: require('./assets/images/copo.png') },
+];
 const renderItem = ({ item }: { item: lanches }) => (
+    <TouchableOpacity style={styles.item}>
+        <Text style={styles.itemTitle}>{item.nome}</Text>
+        <Text style={styles.decoracao}>--------------------------</Text>
+        <Text style={styles.itemText}>R${item.preco},00</Text>
+        <Text style={styles.decoracao}>--------------------------</Text>
+        <Text style={styles.itemText}>{item.Ingredientes}</Text>
+        <Image source={item.image} style={styles.image} />
+    </TouchableOpacity>
+);
+
+
+
+const renderItem2 = ({ item }: { item: acompanhamentos }) => (
+    <TouchableOpacity style={styles.item}>
+        <Text style={styles.itemTitle}>{item.nome}</Text>
+        <Text style={styles.decoracao}>--------------------------</Text>
+        <Text style={styles.itemText}>R${item.preco},00</Text>
+        <Text style={styles.decoracao}>--------------------------</Text>
+        <Text style={styles.itemText}>{item.Ingredientes}</Text>
+        <Image source={item.image} style={styles.image} />
+    </TouchableOpacity>
+);
+
+
+const renderItem3 = ({ item }: { item: bebidas }) => (
     <TouchableOpacity style={styles.item}>
         <Text style={styles.itemTitle}>{item.nome}</Text>
         <Text style={styles.decoracao}>--------------------------</Text>
@@ -66,25 +99,42 @@ function Cardapio(): React.JSX.Element {
             <StatusBar backgroundColor="black" barStyle='light-content' />
 
             <View style={styles.header}>
-                <Text style={styles.headerText}>𝕮𝖍𝖆𝖕𝖆 𝕳𝖆𝖑𝖑𝖘</Text>
+               <Image  style={styles.imageHeader} source={require('./assets/images/logo.png')}/>
             </View>
+            <ScrollView>
+                <Text style={styles.textoA}>𝕷𝖆𝖓𝖈𝖍𝖊𝖘</Text>
+                <FlatList
 
-            <FlatList
-
-                showsVerticalScrollIndicator={false}
-                data={dados}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id}
-
-
-
-            />
+                    showsVerticalScrollIndicator={false}
+                    data={dados}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id}
 
 
-           
+
+                />
+                   <Text style={styles.textoB}>𝕬𝖈𝖔𝖒𝖕𝖆𝖓𝖍𝖆𝖒𝖆𝖓𝖊𝖙𝖔𝖘</Text>
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={dados2}
+                    renderItem={renderItem2}
+                    keyExtractor={(item) => item.id}
+                    style={styles.lista2}
+                />
+
+                <Text style={styles.textoB}>𝕭𝖊𝖇𝖎𝖉𝖆𝖘</Text>
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={dados3}
+                    renderItem={renderItem3}
+                    keyExtractor={(item) => item.id}
+                    style={styles.lista2}
+                />
+            </ScrollView>
+
 
             <View style={styles.footer}>
-                
+
                 <TouchableOpacity>
                     <Image source={require('./assets/images/menu.png')} style={styles.footerIcon} />
                 </TouchableOpacity>
@@ -105,12 +155,36 @@ function Cardapio(): React.JSX.Element {
     );
 }
 const styles = StyleSheet.create({
+    imageHeader:{
+        height:100,
+        marginTop:40,
+        marginLeft:'auto',
+        marginRight:'auto',
+       width:300
+    },
+    textoB:{
+        marginLeft:'auto',
+        marginRight:'auto',
+          fontSize: 40,
+          color: 'black',
+          marginTop:70
+      },
+    textoA:{
+      marginLeft:'auto',
+      marginRight:'auto',
+        fontSize: 40,
+        color: 'black',
+        marginTop:80
+    },
+    lista2: {
+        marginTop: 30
+    },
     container: {
         flex: 1,
 
     },
-    decoracao:{
-        color:'#FFF'
+    decoracao: {
+        color: '#FFF'
     },
     item: {
         backgroundColor: 'black',
@@ -123,16 +197,16 @@ const styles = StyleSheet.create({
     itemText: {
         color: '#FFF',
         flexDirection: 'column',
-        fontSize:20
+        fontSize: 20
     },
-    itemTitle:{
+    itemTitle: {
         fontSize: 30,
-        color:'#FFF'
+        color: '#FFF'
     },
     header: {
         backgroundColor: "#FFF",
         flexDirection: 'row',
-        height: 100,
+        height: 150,
         alignItems: 'center'
     },
     headerText: {
