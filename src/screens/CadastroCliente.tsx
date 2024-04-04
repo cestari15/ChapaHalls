@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import axios from "axios";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 
@@ -78,12 +78,12 @@ const CadastroCliente: React.FC = () => {
     return (
         <View style={styles.container}>
 
-
+                <ScrollView showsVerticalScrollIndicator={false}>
 
 
             <Image source={require('../assets/images/logo.png')} style={styles.logo} />
 
-
+        
 
             <View style={styles.card}>
                 <TextInput style={styles.input}
@@ -138,7 +138,7 @@ const CadastroCliente: React.FC = () => {
             </View>
 
 
-
+           
 
 
             <TouchableOpacity style={styles.button}>
@@ -148,8 +148,7 @@ const CadastroCliente: React.FC = () => {
 
 
 
-
-
+            </ScrollView>
         </View>
     );
 }
