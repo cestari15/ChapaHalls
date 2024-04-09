@@ -7,8 +7,9 @@ const CadastroCliente: React.FC = () => {
     const [nome, setNome] = useState<string>('');
     const [telefone, setTelefone] = useState<string>('');
     const [endereco, setEndereco] = useState<string>('');
-    const [foto, setFoto] = useState<any>('');
+    const [imagem, setImagem] = useState<any>('');
     const [email, setEmail] = useState<string>('');
+    const [cpf,setCpf] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
     const abrirCamera = () => {
@@ -25,13 +26,13 @@ const CadastroCliente: React.FC = () => {
             } else if (response.error) {
                 console.log('erro ao abrir a camera');
             } else {
-                let fotoUri = response.uri || response.assets?.[0]?.uri;
-                setFoto(fotoUri);
-                console.log(fotoUri)
+                let ImageUri = response.uri || response.assets?.[0]?.uri;
+                setImagem(ImageUri);
+                console.log(ImageUri)
             }
         });
     }
-    const cadastarProduto = async () => {
+    const cadastarCliente = async () => {
         try {
             const formData = new FormData();
 
@@ -40,13 +41,15 @@ const CadastroCliente: React.FC = () => {
             formData.append('endereco', endereco);
             formData.append('password', password);
             formData.append('email', email);
-            formData.append('foto', {
-                uri: foto,
+            formData.append('cpf',cpf)
+            formData.append('imagem', {
+                uri: imagem,
                 type: 'image/jpeg',
                 name: new Date() + '.jpg'
             });
 
-            const response = await axios.post('http:/10.137.11.217:8000/api/clientes', formData, {
+          
+            const response = await axios.post('http://10.137.11.217:8000/api/clientes/cadastro', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -70,15 +73,16 @@ const CadastroCliente: React.FC = () => {
             } else if (response.error) {
                 console.log('erro ao abrir a galeria');
             } else {
-                let fotoUri = response.uri || response.assets?.[0]?.uri;
-                setFoto(fotoUri)
+                let ImagemUri = response.uri || response.assets?.[0]?.uri;
+                setImagem(ImagemUri)
             }
         })
     }
     return (
+        <ScrollView>
         <View style={styles.container}>
 
-                <ScrollView showsVerticalScrollIndicator={false}>
+           
 
 
             <Image source={require('../assets/images/logo.png')} style={styles.logo} />
@@ -111,17 +115,24 @@ const CadastroCliente: React.FC = () => {
                     placeholder="Endereço"
                     placeholderTextColor="#FFFFFF"
                     value={endereco}
-                    onChangeText={setTelefone}
+                    onChangeText={setEndereco}
+                />
+                  <TextInput style={styles.input}
+                    placeholder="CPF: 777777777777"
+                    placeholderTextColor="#FFFFFF"
+                    value={cpf}
+                    onChangeText={setCpf}
                 />
                 <TextInput style={styles.input}
                     placeholder="Senha"
                     placeholderTextColor="#FFFFFF"
                     value={password}
                     onChangeText={setPassword}
+                    
                 />
 
                 <View style={styles.alinhamentoImagemSelecionada}>
-                    {foto ? <Image source={{ uri: foto }} style={styles.fotoSelecionada} /> : null}
+                    {imagem ? <Image source={{ uri: imagem }} style={styles.fotoSelecionada} /> : null}
                 </View>
 
                 <TouchableOpacity style={styles.imageButton}>
@@ -133,28 +144,21 @@ const CadastroCliente: React.FC = () => {
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.button3}>
-                    <Text style={styles.buttonText2} onPress={cadastarProduto}>Cadastrar Produto</Text>
+                    <Text style={styles.buttonText2} onPress={cadastarCliente}>Cadastrar Produto</Text>
                 </TouchableOpacity>
             </View>
-
-
-           
-
-
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>CADASTRAR</Text>
-            </TouchableOpacity>
-
-
-
-
-            </ScrollView>
+          
         </View>
+        </ScrollView>
     );
 }
 
 
 const styles = StyleSheet.create({
+    imageButtonText:{
+        color:'black',
+        backgroundColor:'#FFF'
+    },
     buttonText2: {
         color: 'white',
         fontWeight: 'bold'
@@ -164,14 +168,15 @@ const styles = StyleSheet.create({
         padding: 1,
         borderRadius: 5,
         alignItems: 'center',
-        marginBottom: 10
+        marginTop:20
     },
     imageButton: {
-        backgroundColor: 'red',
+        backgroundColor: '#FFF',
         padding: 10,
         borderRadius: 5,
         alignItems: 'center',
-        marginBottom: 10
+        marginBottom: 10,
+        color:'black'
     },
     fotoSelecionada: {
         width: 200,
@@ -238,16 +243,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         borderRadius: 8,
         borderWidth: 1,
-        borderColor: 'white'
+        borderColor: 'white',
+        color:'white'
     },
-    button: {
-        backgroundColor: '#FFF',
-        height: 40,
-        borderRadius: 8,
-        marginTop: 20,
-        width: 50,
-        fontSize: 50
-    },
+ 
     buttonText: {
         fontSize: 25,
         width: 190,

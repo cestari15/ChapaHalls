@@ -39,13 +39,13 @@ const CadastroProduto: React.FC = () => {
             formData.append('nome', nome);
             formData.append('preco', preco);
             formData.append('ingredientes', ingredientes);
-            formData.append('imagen', {
+            formData.append('imagem', {
                 uri: imagem,
                 type: 'image/jpeg',
                 name: new Date() + '.jpg'
             });
 
-            const response = await axios.post('http:/10.137.11.217:8000/api/produtos', formData, {
+            const response = await axios.post('http://10.137.11.217:8000/api/produtos/cadastro', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
