@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 import axios from 'axios';
 const CadastroProduto: React.FC = () => {
@@ -50,7 +50,7 @@ const CadastroProduto: React.FC = () => {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-        } catch(error) {
+        } catch (error) {
             console.log(error);
         }
     }
@@ -76,46 +76,58 @@ const CadastroProduto: React.FC = () => {
     }
 
     return (
-        <View style={styles.container}>
-            <StatusBar backgroundColor='red' barStyle='light-content' />
+        <ScrollView>
+            <View style={styles.container}>
 
-            <View style={styles.header}>
-                <Text style={styles.heraderText}>Top Food</Text>
-            </View>
-            <View style={styles.form}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Nome do Produto"
-                    value={nome}
-                    onChangeText={setNome}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Preço"
-                    value={preco}
-                    onChangeText={setPreco}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Ingredientes"
-                    value={ingredientes}
-                    onChangeText={setIngredientes}
-                    multiline
-                />
-                <View style={styles.alinhamentoImagemSelecionada}>
-                    {imagem ? <Image source={{ uri: imagem }} style={styles.imagemSelecionada} /> : null}
+
+
+
+                <Image source={require('../assets/images/logo.png')} style={styles.logo} />
+
+
+
+                <View style={styles.card}>
+                    <TextInput style={styles.input}
+                        placeholder="Nome"
+                        placeholderTextColor="#FFFFFF"
+                        value={nome}
+                        onChangeText={setNome}
+                    />
+
+
+                    <TextInput style={styles.input}
+                        placeholder="Preço do Produto"
+                        placeholderTextColor="#FFFFFF"
+                        value={preco}
+                        onChangeText={setPreco}
+                    />
+                    <TextInput style={styles.input}
+                        placeholder="Ingredientes"
+                        placeholderTextColor="#FFFFFF"
+                        value={ingredientes}
+                        onChangeText={setIngredientes}
+                    />
+
+
+                    <View style={styles.alinhamentoImagemSelecionada}>
+                        {imagem ? <Image source={{ uri: imagem }} style={styles.fotoSelecionada} /> : null}
+                    </View>
+
+                    <TouchableOpacity style={styles.imageButton}>
+                        <Text style={styles.imageButtonText} onPress={selecionarImagen}>Selecionar Imagen</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.imageButton}>
+                        <Text style={styles.imageButtonText} onPress={abrirCamera}>Tirar Foto</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.button3}>
+                        <Text style={styles.buttonText2} onPress={cadastarProduto}>Cadastrar Produto</Text>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.imageButton}>
-                    <Text style={styles.imageButtonText} onPress={selecionarImagen}>Selecionar Imagen</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.imageButton}>
-                    <Text style={styles.imageButtonText} onPress={abrirCamera}>Tirar Foto</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText} onPress={cadastarProduto}>Cadastrar Produto</Text>
-                </TouchableOpacity>
+
             </View>
-        </View>
+        </ScrollView>
 
     );
 
@@ -123,44 +135,30 @@ const CadastroProduto: React.FC = () => {
 
 }
 const styles = StyleSheet.create({
-    container: {
-
+    imageButtonText: {
+        color: 'black',
+        backgroundColor: '#FFF'
     },
-    header: {
-        backgroundColor: 'red',
-        paddingVertical: 10,
-        alignItems: 'center',
-    },
-    heraderText: {
-        fontSize: 20,
-        fontWeight: 'bold',
+    buttonText2: {
         color: 'white',
+        fontWeight: 'bold'
     },
-    form: {
-        padding: 10,
-        backgroundColor: '#F0F0F0'
-    },
-    input: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 10,
-        paddingHorizontal: 10,
-        borderRadius: 10
+    button3: {
+        backgroundColor: 'black',
+        padding: 1,
+        borderRadius: 5,
+        alignItems: 'center',
+        marginTop: 20
     },
     imageButton: {
-        backgroundColor: 'red',
+        backgroundColor: '#FFF',
         padding: 10,
         borderRadius: 5,
         alignItems: 'center',
-        marginBottom: 10
+        marginBottom: 10,
+        color: 'black'
     },
-    imageButtonText: {
-        color: 'white',
-        fontWeight: 'bold',
-
-    },
-    imagemSelecionada: {
+    fotoSelecionada: {
         width: 200,
         height: 200,
         resizeMode: 'cover',
@@ -170,18 +168,76 @@ const styles = StyleSheet.create({
     alinhamentoImagemSelecionada: {
         alignItems: 'center'
     },
-    button: {
-        backgroundColor: 'red',
-        padding: 1,
-        borderRadius: 5,
-        alignItems: 'center',
-        marginBottom: 10
-    },
-    buttonText: {
-        color: 'white',
-        fontWeight: 'bold'
-    }
+    login: {
+        flexDirection: 'row',
 
+    },
+    logo2: {
+        height: 70,
+        width: 75,
+        marginTop: -7,
+        marginLeft: 30
+    },
+    login2: {
+        height: 65,
+        width: 50,
+
+    },
+    login3: {
+        height: 60,
+        width: 50,
+
+    },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: '#FFF'
+    },
+    logo: {
+        width: 350,
+        height: 200,
+        marginBottom: 400
+    },
+
+
+    title: {
+        marginTop: -400,
+        color: 'black',
+        fontSize: 30,
+    },
+    card: {
+        backgroundColor: '#121212',
+        width: 300,
+        borderRadius: 10,
+        padding: 20,
+        elevation: 3,
+        shadowColor: 'rgba(0,0,0,0.3',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        marginTop: -360
+    },
+    input: {
+
+        marginBottom: 20,
+        paddingHorizontal: 10,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: 'white',
+        color: 'white'
+    },
+
+    buttonText: {
+        fontSize: 25,
+        width: 190,
+        color: 'black',
+        marginLeft: -50
+    },
+    forgotPassword: {
+        color: 'black',
+        textAlign: 'center',
+
+    },
 });
 
 export default CadastroProduto;
